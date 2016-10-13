@@ -20,7 +20,8 @@
     NSTimer * timer;
     NSTimeInterval rockTime;
     NSTimeInterval refreshTime;
-    void(^_gameOverBlock)();
+    NSString * currentText;
+    void(^_gameOverBlock)(NSString *);
 }
 @end
 
@@ -30,24 +31,42 @@ static const uint32_t rockCate = 0x1<<1;
 @implementation WZZScene2
 
 
-- (instancetype)initWithSize:(CGSize)size
+- (instancetype)initWithSize:(CGSize)size currentShip:(NSString *)ship
 {
     self = [super initWithSize:size];
     if (self) {
         self.physicsWorld.gravity = CGVectorMake(0, 0);
         self.physicsWorld.contactDelegate = self;
-        
         manager = [[CMMotionManager alloc] init];
         [manager startAccelerometerUpdates];
+        _currentImageName = ship;
         [self startGame];
     }
     return self;
 }
 
+- (void)setSpaceShip:(SpaceShipType)spaceShipType {
+    switch (spaceShipType) {
+        case SpaceShipType_normal:
+        {
+            
+        }
+            break;
+        case SpaceShipType_GreenGhost:
+        {
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 - (void)startGame {
     const CGFloat spriteWH = 8;
     player = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:CGSizeMake(spriteWH, spriteWH)];
-    player = [SKSpriteNode spriteNodeWithImageNamed:@"ship2"];
+    player = [SKSpriteNode spriteNodeWithImageNamed:_currentImageName];
     [self addChild:player];
     player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.frame.size];
     player.physicsBody.dynamic = YES;
@@ -75,9 +94,14 @@ static const uint32_t rockCate = 0x1<<1;
     po.x = x*self.frame.size.width/2+self.frame.size.width/2;
     po.y = y*self.frame.size.height/2+self.frame.size.height/2;
     [self.physicsWorld setGravity:CGVectorMake(x, y)];
-    if (![self containsPoint:player.position]) {
-        NSLog(@"game over");
+
+    CGFloat px = player.position.x;
+    CGFloat py = player.position.y;
+    if ((px < 0)||(px > self.frame.size.width)||(py < 0)||(py > self.frame.size.height)) {
+        currentText = @"你驶离了安全区域";
+        [self gameOver];
     }
+
     player.zRotation = atan2(-x, y);
 }
 
@@ -173,19 +197,18 @@ static const uint32_t rockCate = 0x1<<1;
             break;
     }
     //动画
-    SKAction * a1 = [SKAction moveTo:CGPointMake(XXXEnd, YYYEnd) duration:2.0f];
+    SKAction * a1 = [SKAction moveTo:CGPointMake(XXXEnd, YYYEnd) duration:3.0f];
     SKAction * a2 = [SKAction removeFromParent];
     [rock runAction:[SKAction sequence:@[a1, a2]]];
 }
 
-- (void)gameoverBlock:(void (^)())gob {
+- (void)gameoverBlock:(void (^)(NSString *))gob {
     if (_gameOverBlock != gob) {
         _gameOverBlock = gob;
     }
 }
 
-#pragma mark - 开始碰撞
-- (void)didBeginContact:(SKPhysicsContact *)contact {
+- (void)gameOver {
     [timer invalidate];
     timer = nil;
     [moveTimer invalidate];
@@ -193,8 +216,14 @@ static const uint32_t rockCate = 0x1<<1;
     [self removeAllChildren];
     NSLog(@"game over");
     if (_gameOverBlock) {
-        _gameOverBlock();
+        _gameOverBlock(currentText);
     }
+}
+
+#pragma mark - 开始碰撞
+- (void)didBeginContact:(SKPhysicsContact *)contact {
+    currentText = @"你被陨石砸了个稀巴烂";
+    [self gameOver];
 }
 
 @end

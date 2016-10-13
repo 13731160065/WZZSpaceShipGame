@@ -8,9 +8,18 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+typedef enum {
+    SpaceShipType_normal,
+    SpaceShipType_GreenGhost
+}SpaceShipType;
+
 @interface WZZScene2 : SKScene
 
+@property (nonatomic, copy) NSString * currentImageName;
+
+- (instancetype)initWithSize:(CGSize)size currentShip:(NSString *)ship;
 - (void)startGame;
-- (void)gameoverBlock:(void(^)())gob;
+- (void)gameoverBlock:(void (^)(NSString * msg))gob;
+- (void)setSpaceShip:(SpaceShipType)spaceShipType;
 
 @end

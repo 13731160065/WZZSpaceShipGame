@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>白色闪光</string>
+		<key>image</key>
+		<string>ship2</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>黄色闪光</string>
+		<key>image</key>
+		<string>yellowShip</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>死亡战神</string>
+		<key>image</key>
+		<string>redShip</string>
+	</dict>
+</array>
+</plist>

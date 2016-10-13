@@ -16,6 +16,9 @@
 		714315B41D8243B2002B2342 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 714315B21D8243B2002B2342 /* LaunchScreen.storyboard */; };
 		714315BF1D8243B2002B2342 /* WZZMotionGameDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 714315BE1D8243B2002B2342 /* WZZMotionGameDemoTests.m */; };
 		714315CA1D8243B2002B2342 /* WZZMotionGameDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 714315C91D8243B2002B2342 /* WZZMotionGameDemoUITests.m */; };
+		717C1E731D9A54A700583F27 /* WZZSpaceShipsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 717C1E721D9A54A700583F27 /* WZZSpaceShipsVC.m */; };
+		717C1E751D9A562D00583F27 /* WZZSpaceShipPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 717C1E741D9A562D00583F27 /* WZZSpaceShipPlist.plist */; };
+		71D146DC1DAF888400425767 /* WZZUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D146DB1DAF888400425767 /* WZZUserInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,11 @@
 		714315C51D8243B2002B2342 /* WZZMotionGameDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WZZMotionGameDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		714315C91D8243B2002B2342 /* WZZMotionGameDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WZZMotionGameDemoUITests.m; sourceTree = "<group>"; };
 		714315CB1D8243B2002B2342 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		717C1E711D9A54A700583F27 /* WZZSpaceShipsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZZSpaceShipsVC.h; sourceTree = "<group>"; };
+		717C1E721D9A54A700583F27 /* WZZSpaceShipsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZZSpaceShipsVC.m; sourceTree = "<group>"; };
+		717C1E741D9A562D00583F27 /* WZZSpaceShipPlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WZZSpaceShipPlist.plist; sourceTree = "<group>"; };
+		71D146DA1DAF888400425767 /* WZZUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZZUserInfo.h; sourceTree = "<group>"; };
+		71D146DB1DAF888400425767 /* WZZUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZZUserInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,11 @@
 				711EC7451D937F3000C99743 /* WZZScene2.m */,
 				714315AA1D8243B2002B2342 /* GameViewController.h */,
 				714315AB1D8243B2002B2342 /* GameViewController.m */,
+				717C1E711D9A54A700583F27 /* WZZSpaceShipsVC.h */,
+				717C1E721D9A54A700583F27 /* WZZSpaceShipsVC.m */,
+				717C1E741D9A562D00583F27 /* WZZSpaceShipPlist.plist */,
+				71D146DA1DAF888400425767 /* WZZUserInfo.h */,
+				71D146DB1DAF888400425767 /* WZZUserInfo.m */,
 				714315AD1D8243B2002B2342 /* Main.storyboard */,
 				714315B01D8243B2002B2342 /* Assets.xcassets */,
 				714315B21D8243B2002B2342 /* LaunchScreen.storyboard */,
@@ -248,6 +261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				717C1E751D9A562D00583F27 /* WZZSpaceShipPlist.plist in Resources */,
 				714315B41D8243B2002B2342 /* LaunchScreen.storyboard in Resources */,
 				714315B11D8243B2002B2342 /* Assets.xcassets in Resources */,
 				714315AF1D8243B2002B2342 /* Main.storyboard in Resources */,
@@ -275,7 +289,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				717C1E731D9A54A700583F27 /* WZZSpaceShipsVC.m in Sources */,
 				714315AC1D8243B2002B2342 /* GameViewController.m in Sources */,
+				71D146DC1DAF888400425767 /* WZZUserInfo.m in Sources */,
 				714315A41D8243B2002B2342 /* AppDelegate.m in Sources */,
 				714315A11D8243B2002B2342 /* main.m in Sources */,
 				711EC7461D937F3000C99743 /* WZZScene2.m in Sources */,
