@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #define CURRENTSIDKEY @"CURRENTSIDKEY"
+#define HIGHSCOREKEY  @"HIGHSCOREKEY"
 
 @interface WZZUserInfo : NSObject
 
 @property (nonatomic, copy) NSString * currentShip;
+@property (nonatomic, assign) NSInteger highScore;
 
 + (instancetype)sharedWZZUserInfo;
 - (void)loadUserInfoFromSanbox;

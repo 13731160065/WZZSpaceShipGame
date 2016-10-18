@@ -7,6 +7,7 @@
 //
 
 #import "WZZScene2.h"
+#import "WZZUserInfo.h"
 #define DefaultColor [UIColor colorWithRed:0.2314f green:0.9882f blue:0.2039f alpha:1.0f]
 #define LOADWIDTH [UIScreen mainScreen].bounds.size.width;
 
@@ -20,8 +21,10 @@
     NSTimer * timer;
     NSTimeInterval rockTime;
     NSTimeInterval refreshTime;
+    NSTimer * scoreTimer;
     NSString * currentText;
     void(^_gameOverBlock)(NSString *);
+    NSInteger currentScore;
 }
 @end
 
@@ -85,6 +88,16 @@ static const uint32_t rockCate = 0x1<<1;
     timer = nil;
     timer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(makeARock) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    
+    [scoreTimer invalidate];
+    scoreTimer = nil;
+    scoreTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(scoreAdd) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    
+    _scoreLabel.text = @"当前分数:0";
+    [_scoreLabel setTextColor:[UIColor whiteColor]];
+    [_scoreLabel setFont:[UIFont systemFontOfSize:13]];
+    [_scoreLabel setTextAlignment:NSTextAlignmentLeft];
 }
 
 - (void)moveChange {
@@ -103,6 +116,10 @@ static const uint32_t rockCate = 0x1<<1;
     }
 
     player.zRotation = atan2(-x, y);
+}
+
+- (void)scoreAdd {
+    _scoreLabel.text = [NSString stringWithFormat:@"当前分数:%ld", ++currentScore];
 }
 
 - (void)makeARock {
@@ -209,10 +226,18 @@ static const uint32_t rockCate = 0x1<<1;
 }
 
 - (void)gameOver {
+    if ([WZZUserInfo sharedWZZUserInfo].highScore < currentScore) {
+        [WZZUserInfo sharedWZZUserInfo].highScore = currentScore;
+        [[WZZUserInfo sharedWZZUserInfo] saveUserInfoToSanbox];
+    }
     [timer invalidate];
     timer = nil;
     [moveTimer invalidate];
     moveTimer = nil;
+    [scoreTimer invalidate];
+    scoreTimer = nil;
+    
+    currentScore = 0;
     [self removeAllChildren];
     NSLog(@"game over");
     if (_gameOverBlock) {
@@ -223,6 +248,7 @@ static const uint32_t rockCate = 0x1<<1;
 #pragma mark - 开始碰撞
 - (void)didBeginContact:(SKPhysicsContact *)contact {
     currentText = @"你被陨石砸了个稀巴烂";
+    
     [self gameOver];
 }
 

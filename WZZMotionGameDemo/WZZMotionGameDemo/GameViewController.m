@@ -19,6 +19,8 @@
     UILabel * label;
     UIButton * changeShip;
     NSString * currentShip;
+    UILabel * screenLabel;
+    UILabel * highLabel;
 }
 
 @end
@@ -38,11 +40,20 @@
     [self.view addSubview:skView];
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
+    
+    screenLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 8, [UIScreen mainScreen].bounds.size.width-16, 20)];
+    [self.view addSubview:screenLabel];
+    [screenLabel setFont:[UIFont systemFontOfSize:13.0f]];
+    [screenLabel setTextColor:[UIColor whiteColor]];
+    [screenLabel setTextAlignment:NSTextAlignmentLeft];
+    [screenLabel setText:@"当前分数:0"];
 
     scene = [[WZZScene2 alloc] initWithSize:[UIScreen mainScreen].bounds.size currentShip:currentShip];
     scene.scaleMode = SKSceneScaleModeAspectFill;
+    scene.scoreLabel = screenLabel;
     
     [scene gameoverBlock:^(NSString *msg) {
+        
         button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:[UIScreen mainScreen].bounds];
         [self.view addSubview:button];
@@ -65,6 +76,17 @@
         [changeShip.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
         [changeShip setBackgroundColor:[UIColor whiteColor]];
         [changeShip setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        [screenLabel setTextColor:[UIColor blackColor]];
+        [self.view bringSubviewToFront:screenLabel];
+        [screenLabel setFont:[UIFont systemFontOfSize:15]];
+        [screenLabel setTextAlignment:NSTextAlignmentCenter];
+        
+        highLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 8*2+20, [UIScreen mainScreen].bounds.size.width-16, 20)];
+        [self.view addSubview:highLabel];
+        [highLabel setTextAlignment:NSTextAlignmentCenter];
+        [highLabel setText:[NSString stringWithFormat:@"最高分:%ld", [WZZUserInfo sharedWZZUserInfo].highScore]];
+        [highLabel setFont:[UIFont boldSystemFontOfSize:15]];
     }];
     
     [skView presentScene:scene];
@@ -84,6 +106,7 @@
     [button removeFromSuperview];
     [changeShip removeFromSuperview];
     [label removeFromSuperview];
+    [highLabel removeFromSuperview];
     [scene setCurrentImageName:currentShip];
     [scene startGame];
 }

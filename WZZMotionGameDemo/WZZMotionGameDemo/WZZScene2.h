@@ -16,6 +16,7 @@ typedef enum {
 @interface WZZScene2 : SKScene
 
 @property (nonatomic, copy) NSString * currentImageName;
+@property (nonatomic, strong) UILabel * scoreLabel;
 
 - (instancetype)initWithSize:(CGSize)size currentShip:(NSString *)ship;
 - (void)startGame;

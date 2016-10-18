@@ -34,6 +34,7 @@ static WZZUserInfo *_instance;
 
 - (void)loadUserInfoFromSanbox {
     _currentShip = [[NSUserDefaults standardUserDefaults] objectForKey:CURRENTSIDKEY];
+    _highScore = [[NSUserDefaults standardUserDefaults] integerForKey:HIGHSCOREKEY];
 }
 
 - (void)saveUserInfoToSanbox {
@@ -44,10 +45,14 @@ static WZZUserInfo *_instance;
     } else {
         [userDefault setObject:nil forKey:CURRENTSIDKEY];
     }
+    
+    [userDefault setInteger:_highScore forKey:HIGHSCOREKEY];
+    
 }
 
 - (void)cleanUserInfo {
     _currentShip = @"";
+    _highScore = 0;
     [self saveUserInfoToSanbox];
 }
 
