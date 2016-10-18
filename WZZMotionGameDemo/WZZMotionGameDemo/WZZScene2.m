@@ -94,6 +94,17 @@ static const uint32_t rockCate = 0x1<<1;
     scoreTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(scoreAdd) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     
+//    dispatch_queue_t tt = dispatch_queue_create("tt", DISPATCH_QUEUE_SERIAL);
+//    dispatch_async(tt, ^{
+//        for (int i = 0; i < 5; i++) {
+//            [NSThread sleepForTimeInterval:5.0f];
+//            [timer invalidate];
+//            timer = nil;
+//            timer = [NSTimer scheduledTimerWithTimeInterval:2/(i+1) target:self selector:@selector(makeARock) userInfo:nil repeats:YES];
+//            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+//        }
+//    });
+    
     _scoreLabel.text = @"当前分数:0";
     [_scoreLabel setTextColor:[UIColor whiteColor]];
     [_scoreLabel setFont:[UIFont systemFontOfSize:13]];
